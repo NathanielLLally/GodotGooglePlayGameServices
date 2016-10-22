@@ -188,6 +188,16 @@ public class GodotGooglePlayGameServices extends Godot.SingletonBase
 		return STATUS_OTHER;
 	}
 
+ 	public String getUserID() {
+			String ret = null;
+      if (client.isConnected()) {
+	      ret = Games.Players.getCurrentPlayerId(client);
+        Log.d("godot", "GPGS: get_user_id:"+ret);
+			}
+			return ret;
+		}
+
+
     /* Achievements Methods
      * ********************************************************************** */
 
@@ -356,7 +366,7 @@ public class GodotGooglePlayGameServices extends Godot.SingletonBase
     public GodotGooglePlayGameServices(Activity activity) {
         this.activity = activity;
         registerClass("GodotGooglePlayGameServices", new String[] {
-            "init", "signIn", "signOut", "getStatus",
+            "init", "signIn", "signOut", "getStatus", "getUserID",
             "unlockAchy", "incrementAchy", "showAchyList",
             "leaderSubmit", "showLeaderList", "getLeaderboardValue"
         });
